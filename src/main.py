@@ -2,33 +2,30 @@ import pathlib
 
 import PyPDF2
 
+from database import LiteDatabase
 from extract_text import extract_text_from_word, extract_text_from_pdf, extract_text_from_powerpoint
 from process_words import remove_stop_words
+from collections import Counter
 
 
 class Main:
 
     def __init__(self):
 
-        self.reverse_index = {}
         self.repo_path = '/Users/jazib/Desktop/workrepo/FAST-Resources/'
         self.fast_resources = pathlib.Path(self.repo_path)
+        self.db = LiteDatabase()
 
     def run(self):
         for file_path in self.fast_resources.rglob("*"):
             text = self.extract_text_from_file(file_path)
             if text is None:
                 continue
-            filtered_text = remove_stop_words(text)
             topic_name = self.extract_topic_name(str(file_path))
-            self.add_to_reverse_index(filtered_text, str(file_path))
+            filtered_words = remove_stop_words(text)
 
-    def add_to_reverse_index(self, filtered_text, file_path):
-        for word in filtered_text:
-            if word in self.reverse_index:
-                self.reverse_index[word].add(file_path)
-            else:
-                self.reverse_index[word] = {file_path}
+            self.db.insert_index(topic_name, str(file_path), Counter(filtered_words))
+            print(file_path)
 
     def extract_text_from_file(self, file_path):
         if str(file_path).endswith(".pdf"):
@@ -48,7 +45,7 @@ class Main:
             except Exception as e:
                 print(f"Skipped non-PowerPoint file: {file_path} ({str(e)})")
         else:
-            print(f"file not supported ${file_path}")
+            print(f"file not supported {file_path}")
             return None
 
     def extract_topic_name(self, file_path):
