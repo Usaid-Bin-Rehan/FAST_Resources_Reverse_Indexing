@@ -12,7 +12,8 @@ def remove_stop_words(text):
 
 
 def is_filler_word(word):
-    return word in stopwords or word in punctuation or len(word) < 3
+    cleansed_word = cleanse(word)
+    return cleansed_word in stopwords or cleansed_word in punctuation or len(cleansed_word) <= 3
 
 
 def cleanse(word):
