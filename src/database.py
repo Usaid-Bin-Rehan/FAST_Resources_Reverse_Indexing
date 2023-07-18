@@ -4,7 +4,7 @@ import sqlite3
 class LiteDatabase:
 
     def __init__(self):
-        self.conn = sqlite3.connect('fast_zakhira.db')
+        self.conn = sqlite3.connect('/Users/jazib/Desktop/workrepo/FAST_Resources_Reverse_Indexer/fast_zakhira.db')
         self.conn.execute('''
             CREATE TABLE IF NOT EXISTS reverse_index (
                 WORD           TEXT    NOT NULL,
@@ -28,7 +28,7 @@ class LiteDatabase:
         query = ""
         try:
             for word, relevance in words.items():
-                query = f"INSERT INTO reverse_index VALUES (?, ?, ?, ?);"
+                query = "INSERT INTO reverse_index VALUES (?, ?, ?, ?);"
                 self.conn.execute(query, [word, topic_name, file_path, relevance])
             self.conn.commit()
         except Exception as e:
@@ -37,3 +37,12 @@ class LiteDatabase:
 
     def close(self):
         self.conn.close()
+
+    def search(self, word):
+        query = """
+        SELECT * FROM reverse_index
+        WHERE word like ?
+        ORDER BY relevance DESC
+        """
+        cursor = self.conn.execute(query, [word])
+        return {row[2]: row for row in cursor}
