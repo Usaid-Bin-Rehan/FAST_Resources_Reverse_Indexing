@@ -14,6 +14,10 @@ Iterate over all the documents and generate index to make searching possible
 
 ## Search Flow (In Progress)
 A function that take search keywords as input and returns like of documents that contain those words
+
+### Access Patterns
+- Search by keyword(s)
+- Search by keywords and Topic Name
 ### Steps
 1. Example
 

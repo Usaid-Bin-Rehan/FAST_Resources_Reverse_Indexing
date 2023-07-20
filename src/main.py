@@ -24,8 +24,15 @@ class Main:
             topic_name = self.extract_topic_name(str(file_path))
             filtered_words = remove_stop_words(text)
 
-            self.db.insert_index(topic_name, str(file_path), Counter(filtered_words))
+            url = self.create_absolute_link(file_path)
+            self.db.insert_index(topic_name, url, Counter(filtered_words))
             print(file_path)
+
+    def create_absolute_link(self, file_path):
+        url = f"https://github.com/hassanzhd/FAST-Resources/blob/master/"
+        url += str(file_path).replace(self.repo_path, "")
+        url = url[:len(url)].replace(' ', '%20')
+        return url
 
     def extract_text_from_file(self, file_path):
         if str(file_path).endswith(".pdf"):
