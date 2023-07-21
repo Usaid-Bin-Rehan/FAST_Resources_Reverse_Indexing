@@ -25,14 +25,17 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 ### ii. If only single file is found then its keys (file paths and Relevance score) is fetched from src dict (DB)
 ### iii. If multiple files are found then their file paths are intersected and the intersection's keys are fetched
 
-## 5. CICD (database.py)
+## 5. CICD (database.py --> AWS + GitHub-Actions)
 ### i. Iniating SQLite database with text columns: Word, Topic, File and integer column: Relevance score
 ### ii. Creating Index at runtime on Word column and initiating Search Pattern 1 that allows search with Topic
-### iii. Creating Index at runtime on Word column and initiating Search Pattern 1 that allows search without Topic
-### iv. Inserting the Word and its Topic, File Path, and Relevance score (Term Frequency calculated in main.py)
-### v. Searching in database using SQL query with input word with results in decreasing order of Relevance score
+### iii. Creating Index at runtime on Word column and initiating Search Pattern 2 that allows search without Topic
+### iv. Inserting the Word and its Topic, File Path, and Relevance score (TF in main.py for ordering search results)
+### v. Using S3 as front, DynamoDB over SQLite, and Actions to trigger Lambda API-Gateway when new file added
 
-# _Need to fix documentation below:_
+
+
+
+# _Need to fix documentation below & Create separate Contributions Guidline file:_
 ## Generate Reverse Index Flow
 Iterate over all the documents and generate index to make searching possible
 ### Steps
