@@ -1,9 +1,38 @@
-# FAST_Resources Reverse_Indexer
+# **FAST_Resources Reverse_Indexer**
 
-# Purpose
-To query "FAST_Resources" using text. 
-A user should be able to search via keywords and retrieve list of documents that contain those keywords
-[Fast Resources Link](https://github.com/hassanzhd/FAST-Resources/tree/master)
+# _Abstract_
+Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/tree/master), a repository of study materials, for user to enter keywords as text, to retrieve all files that contains them. 
+
+# _Pipeline_
+
+## 1. Extract (extract_text.py)
+### Used Python Libraries to extract text from respective file types (PDF/PPT/DOC)
+
+## 2. Transform (process_words.py)
+### i. Using Regular Expressions library to clean trailing whitespaces from files and converting to Lower Case
+### ii. Using NLTK library predefined stopwords dictionary to identify any Stop Words
+### iii. Transforming into Cleansed Words after filtering Fillers (Stop Words / Punctuation / 3 Letter Words)
+
+## 3. Load (main.py)
+### i. Initializing the FAST-Resources repository and SQLite database on Local machine
+### ii. Extracting text from file, skipping over any text-less files and Counting Term Frequency of Transformed
+### iii. Extracting Topic Name, that is, text in the file path before '/' endpoint
+### iv. Creating Absolute Link, that is, replacing whitespaces with '%20' to format as URL
+### v. Running the driver program to perform all the above for all the files present in FAST-Resources repository
+
+## 4. Search (search.py)
+### i. Searching for the query (input) by splitting into words for using as index to fetch file paths in its row
+### ii. If only single file is found then its keys (file paths and Relevance score) is fetched from src dict (DB)
+### iii. If multiple files are found then their file paths are intersected and the intersection's keys are fetched
+
+## 5. CICD (database.py)
+### i. Iniating SQLite database with text columns: Word, Topic, File and integer column: Relevance score
+### ii. Creating Index at runtime on Word column and initiating Search Pattern 1 that allows search with Topic
+### iii. Creating Index at runtime on Word column and initiating Search Pattern 1 that allows search without Topic
+### iv. Inserting the Word and its Topic, File Path, and Relevance score (Term Frequency calculated in main.py)
+### v. Searching in database using SQL query with input word with results in decreasing order of Relevance score
+
+# _Need to fix documentation below:_
 ## Generate Reverse Index Flow
 Iterate over all the documents and generate index to make searching possible
 ### Steps
