@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+h1#main{ 
+    font-family: 'Roboto';
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+#search_input {
+    width: 750px;
+}
+
+#search_input input[type="text"]:focus {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 black;
+}
+
+#search_input input[type="text"]:focus + label {
+    color: black;
+}
+
+
+#submit_button a {
+    background-color: black;
+}   
+
+
+#submit_button a:hover {
+    background-color: grey;
+}
+
+#links {
+    display: none;
+    margin-top: 20px;
+}
+
+body .container > #loader {
+    display: none;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loader .spinner-layer {
+    border-color: black;
+}
+
+td a {
+    color: grey;
+}
+
+td a:hover {
+    transition: .5s;
+    color: black;
+    text-decoration: underline;
+}
