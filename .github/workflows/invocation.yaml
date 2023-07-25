@@ -1,0 +1,42 @@
+name: Check New File Addition
+on:
+  push:
+    branches:
+      - main # Replace with your desired branch name
+
+jobs:
+  check_new_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get the list of added files using GitHub API
+        id: added_files
+        run: |
+          PREVIOUS_SHA=$(git rev-parse ${{ github.event.before }})
+          URL="https://api.github.com/repos/${{ github.repository }}/compare/$PREVIOUS_SHA...${{ github.sha }}"
+          ADDED_FILES=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" $URL | jq -r '.files[] | select(.status == "added") | .filename')
+          echo "::set-output name=files::$ADDED_FILES"
+
+      - name: Check for new file additions
+        run: |
+          ADDED_FILES="${{ steps.added_files.outputs.files }}"
+          IFS=$'\n' # Set the Internal Field Separator to newline to handle spaces in file names
+          for FILE in $ADDED_FILES; do
+            # Replace spaces with %20 in the file name
+            FILE_NAME_FILTERED="${FILE// /%20}"
+
+            # Construct the GitHub API URL to get the raw file link
+            GITHUB_API_URL="https://api.github.com/repos/${{ github.repository }}/contents/$FILE_NAME_FILTERED"
+
+            # Make a GET request to the GitHub API to get the raw file link
+            DOWNLOADABLE_LINK=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $GITHUB_API_URL | jq -r '.download_url')
+
+            echo "Downloadable Link: $DOWNLOADABLE_LINK"
+            echo "Filtered file name: $FILE_NAME_FILTERED"
+            echo "New file added: $FILE"
+            echo "New file path: $FILE_path"
+            # Here you can add more actions or commands you want to perform for each new file added.
+          done
