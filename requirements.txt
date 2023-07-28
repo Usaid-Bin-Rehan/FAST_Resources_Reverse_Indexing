@@ -1,0 +1,5 @@
+boto3==1.28.14
+docx2txt==0.8
+nltk==3.8.1
+PyPDF2==3.0.1
+python-pptx==0.6.21
