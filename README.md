@@ -6,33 +6,49 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 # _Pipeline_
 
 ## 1. Extract (extract_text.py)
-### Used Python Libraries to extract text from respective file types (PDF/PPT/DOC)
+#### Using Python Libraries to extract text from respective file types (PDF/PPT/DOC)
 
 ## 2. Transform (process_words.py)
-### i. Using Regular Expressions library to clean trailing whitespaces from files and converting to Lower Case
-### ii. Using NLTK library predefined stopwords dictionary to identify any Stop Words
-### iii. Transforming into Cleansed Words after filtering Fillers (Stop Words / Punctuation / 3 Letter Words)
+#### i. Using Regular Expressions library to clean trailing whitespaces from files and converting to Lower Case
+#### ii. Using NLTK library predefined stopwords dictionary to identify any Stop Words
+#### iii. Transforming into Cleansed Words after filtering Fillers (Stop Words / Punctuation / 3 Letter Words)
 
 ## 3. Load (main.py)
-### i. Initializing the FAST-Resources repository and SQLite database on Local machine
-### ii. Extracting text from file, skipping over any text-less files and Counting Term Frequency of Transformed
-### iii. Extracting Topic Name, that is, text in the file path before '/' endpoint
-### iv. Creating Absolute Link, that is, replacing whitespaces with '%20' to format as URL
-### v. Running the driver program to perform all the above for all the files present in FAST-Resources repository
+#### i. Initializing the FAST-Resources repository and SQLite database on Local machine
+#### ii. Extracting text from file, skipping over any text-less files and Counting Term Frequency of Transformed
+#### iii. Extracting Topic Name, that is, text in the file path before '/' endpoint
+#### iv. Creating Absolute Link, that is, replacing whitespaces with '%20' to format as URL
+#### v. Running the driver program to perform all the above for all the files present in FAST-Resources repository
 
 ## 4. Search (search.py)
-### i. Searching for the query (input) by splitting into words for using as index to fetch file paths in its row
-### ii. If only single file is found then its keys (file paths and Relevance score) is fetched from src dict (DB)
-### iii. If multiple files are found then their file paths are intersected and the intersection's keys are fetched
+#### i. Searching for the query (input) by splitting into words for using as index to fetch file paths in its row
+#### ii. If only single file is found then its keys (file paths and Relevance score) is fetched from src dict (DB)
+#### iii. If multiple files are found then their file paths are intersected into posting list before keys fetched
 
 ## 5. CICD (database.py --> AWS + GitHub-Actions)
-### i. Iniating SQLite database with text columns: Word, Topic, File and integer column: Relevance score
-### ii. Creating Index at runtime on Word column and initiating Search Pattern 1 that allows search with Topic
-### iii. Creating Index at runtime on Word column and initiating Search Pattern 2 that allows search without Topic
-### iv. Inserting the Word and its Topic, File Path, and Relevance score (TF in main.py for ordering search results)
-### v. Using S3 as front, DynamoDB over SQLite, and Actions to trigger Lambda API-Gateway when new file added
+#### i. Iniating SQLite database with text columns: Word, Topic, File and integer column: Relevance score
+#### ii. Creating Index at runtime on Word column and initiating Search Pattern 1 that allows search with Topic
+#### iii. Creating Index at runtime on Word column and initiating Search Pattern 2 that allows search without Topic
+#### iv. Inserting the Word and its Topic, File Path, and Relevance score (TF in main.py for ordering search results)
+#### v. Using S3 as front, DynamoDB over SQLite, and Actions to trigger Lambda API-Gateway when new file added
 
+# _Contributions_
 
+## 1. Benchmark Retrieval Models
+### i. Boolean Retrieval (BoW ie Set Algebra)
+#### a. Extended
+#### b. Fuzzy-Set
+### ii. AdHoc Retrieval (Query w/ Prec & Recall)
+#### a. Inverted-Index (Dictionary & Posting-List)
+### iii. Tolerant-Retrieval (Tree / Hashmap for WildCard & Spelling)
+#### a. General
+#### b. Kgram
+#### c. Kgram-Overlap
+#### d. Levestein / Edit-Distance
+### iv. Vector-Space (BoW, Scoring, Term-Weightage, Ranking)
+### v. Probabilistic (BIM & PRP)
+
+## 2. 
 
 
 # _Need to fix documentation below & Create separate Contributions Guidline file:_
