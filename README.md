@@ -34,22 +34,57 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 
 # _Contributions_
 
-## 1. Benchmark Retrieval Models
-### i. Boolean Retrieval (BoW ie Set Algebra)
-#### a. Extended
-#### b. Fuzzy-Set
-### ii. AdHoc Retrieval (Query w/ Prec & Recall)
-#### a. Inverted-Index (Dictionary & Posting-List)
-### iii. Tolerant-Retrieval (Tree / Hashmap for WildCard & Spelling)
-#### a. General
-#### b. Kgram
-#### c. Kgram-Overlap
-#### d. Levestein / Edit-Distance
-### iv. Vector-Space (BoW, Scoring, Term-Weightage, Ranking)
-### v. Probabilistic (BIM & PRP)
+## _(1) IR Good-First Issues_
 
-## 2. 
+### 1. Resolve Processing Challenges
+#### i. Tokenization
+##### a. Encoding
+##### b. Stopwords
+#### ii. Normalization
+#### iii. Morphological Analysis
+#### iv. Stemming & Lemmatization
+#### v. Phrase Query (Positional Posting-List)
+##### a. Biword-Index & Extended Biword-Index
+##### b. Positional-Index
+#### vi. Tagging
+##### a. Parts-of-Speech
+##### b. Named-Entity-Recognition / Topic-Detection
 
+### 2. Constructions & Compressions for Mining
+#### i. Constructions
+##### a. Block-based
+##### b. Single Pass-in
+##### c. Distributed
+#### ii. Compressions
+##### a. Index
+##### b. Dictionary
+##### c. Posting-List
+#### iii. Mining
+##### a. Classification
+##### b. Clustering
+##### c. Recommender-System
+##### d. Crawling & Linking
+
+### 3. Benchmark Models
+#### i. Boolean Retrieval (BoW ie Set Algebra)
+##### a. Simple
+##### b. Extended (Partial-Matching & Term-Weights to Rank)
+##### c. Fuzzy-Set (Fuzzy Set Theory 
+#### ii. AdHoc Retrieval (Inverted-Index & Posting-List Query w/ Prec & Recall)
+#### iii. Tolerant-Retrieval (Tree / Hashmap Dictionary w/ WildCard & Spelling)
+##### a. General
+##### b. Kgram
+##### c. Kgram-Overlap
+##### d. Levesthein / Edit-Distance
+#### iv. Vector-Space (CURRENTLY USING)
+#### v. Probabilistic
+##### a. Binary Independence
+##### b. Probability Ranking Principle
+
+## _(2) Data-Engineering Good-First Issues_
+- Check Issues
+
+## _(3) Security Good-First Issues_
 
 # _Need to fix documentation below & Create separate Contributions Guidline file:_
 ## Generate Reverse Index Flow
