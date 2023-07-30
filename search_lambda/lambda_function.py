@@ -24,7 +24,22 @@ def query_dynamo_db(keyword):
     okay = table.query(
         KeyConditionExpression=Key('pk').eq(keyword)
     )
-    return {item['file_path']: item for item in okay['Items']}
+    rows = {item['file_path']: item for item in okay['Items']}
+    for key, value in rows.items():
+        del value['pk']
+        del value['file_path']
+    return rows
+
+
+def intersect_result_v2(results):
+    if len(results) == 1:
+        return results[0]
+
+    intersect = results[0]
+    for i in range(1, len(results)):
+        intersect = {x: intersect[x] for x in intersect if x in results[i]}
+
+    return intersect
 
 
 def intersect_result(results):
@@ -51,6 +66,8 @@ def lambda_handler(event, context):
         query_words = [individual_word.strip() for individual_word in payload['query'].lower().split(',')]
         results = [query_dynamo_db(word) for word in query_words]
 
+        if event["requestContext"]["stage"] == 'v2':
+            return respond(None, intersect_result_v2(results))
         return respond(None, intersect_result(results))
     else:
         return respond(ValueError('Unsupported method "{}"'.format(operation)))
