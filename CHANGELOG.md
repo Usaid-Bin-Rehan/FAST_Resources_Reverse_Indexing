@@ -54,16 +54,31 @@ Learn the CHANGELOG.md standards from Internet
 #5 If multiple docs then they are intersected. Keys ie inv-ind gotten from source_dict ie our DB
 
 
-## Main (Deployed on DynamoDB & considering S3 for frontend and improving performance before Lambda)
+## Add_Lambda_Code
 
-### Potential Next Steps (First 3 may be Essential while other may be Nice to Haves)
 
-#1 Calculate relevance using TF*IDF instead of only TF (more accurate based on term-sig)
 
-#2 Use Cos_Sim in Search Function (check to see if performance improved)
 
-#3 Use Github Actions to trigger API then lambda to update index when new doc added (performance improvement)
+## Main (Created λ for Backend Search & Terraform provisioned S3 for Frontend Static-Assets / FAST-Resources)
 
-#4 Improve UX by Phrase Queries (more accurate based on exact words order)
+Terraform, used for IaC, allows automated & reusable provisioning (CRUD) of infra (containers / cloud), using YML,
+a declarative and non-compiling, to replace error-prone & manual set-up of resources, similar to running a program
 
-#5 Improve UX by Fuzzy Distance / Stem-Lemm (handle minor errors or variations in search term)
+(1) Set up provider (AWS) in main.tf
+(2) Create var, to store profile, bucket, document and base directory names, for reusability instead of hardcode
+(3) Create tfvars file to initialize those variables with the actual names of our AWS services and run-time values
+(4) Automatically generated lock.hcl file that stores version of AWS for compatibility considerations
+(5) tfstate and tfstate.backup to keep log of resources provisioned for ability to revert to an instance
+
+1. terraform init  # project is currently using IaC only for S3 not DDB nor Lambda
+2. terraform plan  # generates execution plan displaying changes being made to infra
+3. terraform apply # apply those changes based on config in main.tf and tfvars
+
+#1 Created a reusable module static_files to manage static files
+#2 Its source is set as templates from HashiCorp's predefined directory with variable base directory
+#3 Resource is created for S3 object to store static files
+#4 Loop is created to execute resource block for each file in the file variable
+#5 Base dir is removed & source relative path is made absolute when files are made as keys of S3 bucket w/ checksum
+
+
+# 
