@@ -41,8 +41,9 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 ##### a. Encoding
 ##### b. Stopwords
 ##### ii. Phrase Query (Positional Posting-List)
-##### a. Biword-Index & Extended Biword-Index
-##### b. Positional-Index
+##### a. Biword-Index
+##### b. Extended Biword-Index
+##### c. Positional-Index
 #### iii. Morphological Analysis
 ##### a. Stemming-Lemmatization
 ##### b. POS-Tagging
