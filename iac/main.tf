@@ -8,26 +8,27 @@ terraform {
 }
 
 provider "aws" {
-    profile =  var.profile_name
+  profile = var.profile_name
+  region  = var.region
 }
 
 resource "aws_s3_bucket" "fast-resources-search" {
-  bucket = var.bucket_name
-  tags   = {
-    Name = var.bucket_name
+  bucket = var.static_site_bucket_name
+  tags = {
+    Name = var.static_site_bucket_name
   }
 }
 
 resource "aws_s3_bucket_website_configuration" "fast-resources-search" {
-    bucket = aws_s3_bucket.fast-resources-search.id
+  bucket = aws_s3_bucket.fast-resources-search.id
 
-    index_document {
-        suffix = var.index_document_name
-    }
+  index_document {
+    suffix = var.index_document_name
+  }
 
-    error_document {
-        key = var.index_document_name
-    }
+  error_document {
+    key = var.index_document_name
+  }
 }
 
 # resource "aws_s3_bucket_acl" "fast-resources-search" {
@@ -56,15 +57,15 @@ resource "aws_s3_bucket_website_configuration" "fast-resources-search" {
 # }
 
 module "static_files" {
-  source = "hashicorp/dir/template"
+  source   = "hashicorp/dir/template"
   base_dir = var.base_dir
 }
 
 resource "aws_s3_object" "static_file" {
-    for_each     = module.static_files.files
-    bucket       = aws_s3_bucket.fast-resources-search.id
-    key          = replace(each.value.source_path, var.base_dir, "")
-    source       = abspath(each.value.source_path)
-    content_type = each.value.content_type
-    etag         = filemd5(abspath(each.value.source_path))
+  for_each     = module.static_files.files
+  bucket       = aws_s3_bucket.fast-resources-search.id
+  key          = trimprefix(each.value.source_path, "${var.base_dir}/")
+  source       = abspath(each.value.source_path)
+  content_type = each.value.content_type
+  etag         = filemd5(abspath(each.value.source_path))
 }
