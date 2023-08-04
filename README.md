@@ -37,18 +37,19 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 ## _(1) IR Good-First Issues_
 
 ### 1. Resolve Processing Challenges
-#### i. Tokenization
+#### i. Tokenization (CURRENTLY USING)
 ##### a. Encoding
 ##### b. Stopwords
 #### ii. Normalization
 #### iii. Morphological Analysis
-#### iv. Stemming & Lemmatization
+##### a. Prefix-Suffix
+##### b. Stemming-Lemmatization
+##### c. Verb-Tense
+##### d. POS-Tagging
+##### e. NER / Topic-Recognition
 #### v. Phrase Query (Positional Posting-List)
 ##### a. Biword-Index & Extended Biword-Index
 ##### b. Positional-Index
-#### vi. Tagging
-##### a. Parts-of-Speech
-##### b. Named-Entity-Recognition / Topic-Detection
 
 ### 2. Constructions & Compressions for Mining
 #### i. Constructions
