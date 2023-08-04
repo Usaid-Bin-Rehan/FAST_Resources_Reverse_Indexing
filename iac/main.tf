@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "5.9.0"
     }
+    archive = {
+      source  = "hashicorp/archive"
+      version = "2.4.0"
+    }
   }
 }
 
@@ -170,10 +174,14 @@ resource "aws_iam_role" "reverse_index_search_role" {
   ]
 }
 
+locals {
+  fast_resources_reverse_index_search_archive_name = "fast_resources_reverse_index_search.zip"
+}
+
 data "archive_file" "fast_resources_search_archive" {
   type        = "zip"
-  source_file = "${path.module}/../search_lambda/lambda_function.py"
-  output_path = "${path.module}/fast_resources_reverse_index_search.zip"
+  source_file = "${path.module}/${var.search_lambda_path}"
+  output_path = "${path.module}/${local.fast_resources_reverse_index_search_archive_name}"
 }
 
 resource "aws_lambda_function" "fast_resources_search_lambda" {
@@ -259,7 +267,7 @@ resource "null_resource" "reverse_index_search_archive_delete" {
   }
   provisioner "local-exec" {
     command = <<EOT
-      rm -rf fast_resources_reverse_index_search.zip
+      rm -rf ${local.fast_resources_reverse_index_search_archive_name}
     EOT
   }
 }
