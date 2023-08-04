@@ -40,16 +40,13 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 #### i. Tokenization (CURRENTLY USING)
 ##### a. Encoding
 ##### b. Stopwords
-#### ii. Normalization
-#### iii. Morphological Analysis
-##### a. Prefix-Suffix
-##### b. Stemming-Lemmatization
-##### c. Verb-Tense
-##### d. POS-Tagging
-##### e. NER / Topic-Recognition
-#### v. Phrase Query (Positional Posting-List)
+##### ii. Phrase Query (Positional Posting-List)
 ##### a. Biword-Index & Extended Biword-Index
 ##### b. Positional-Index
+#### iii. Morphological Analysis
+##### a. Stemming-Lemmatization
+##### b. POS-Tagging
+##### c. NER / Topic-Recognition
 
 ### 2. Constructions & Compressions for Mining
 #### i. Constructions
