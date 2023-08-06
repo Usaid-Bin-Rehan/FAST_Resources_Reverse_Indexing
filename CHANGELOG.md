@@ -4,11 +4,11 @@ File serves as history of step by step development approach
 
 Good place for understanding codebase with little overwhelm
 
-Needs verification of other contributors to see if accurate
-
 Needs to be formatted according to changelog.md standards
 
 Learn the CHANGELOG.md standards from Internet
+
+Using Repo as free storage & DDB for just cheaper indexing
 
 
 ## Phase 1 (can be quickly run on Colab)
@@ -57,6 +57,7 @@ Learn the CHANGELOG.md standards from Internet
 ## Add_Lambda_Code
 
 
+## Move_Core_Code
 
 
 ## Main (Created λ for Backend Search & Terraform provisioned S3 for Frontend Static-Assets / FAST-Resources)
@@ -65,20 +66,51 @@ Terraform, used for IaC, allows automated & reusable provisioning (CRUD) of infr
 a declarative and non-compiling, to replace error-prone & manual set-up of resources, similar to running a program
 
 (1) Set up provider (AWS) in main.tf
+
 (2) Create var, to store profile, bucket, document and base directory names, for reusability instead of hardcode
+
 (3) Create tfvars file to initialize those variables with the actual names of our AWS services and run-time values
+
 (4) Automatically generated lock.hcl file that stores version of AWS for compatibility considerations
+
 (5) tfstate and tfstate.backup to keep log of resources provisioned for ability to revert to an instance
 
+
 1. terraform init  # project is currently using IaC only for S3 not DDB nor Lambda
+   
 2. terraform plan  # generates execution plan displaying changes being made to infra
+ 
 3. terraform apply # apply those changes based on config in main.tf and tfvars
 
+
 #1 Created a reusable module static_files to manage static files
+
 #2 Its source is set as templates from HashiCorp's predefined directory with variable base directory
+
 #3 Resource is created for S3 object to store static files
+
 #4 Loop is created to execute resource block for each file in the file variable
+
 #5 Base dir is removed & source relative path is made absolute when files are made as keys of S3 bucket w/ checksum
 
 
-# 
+## Onboarding of API-Gateway & Search-Lambda resources to IaC
+
+
+
+
+## Indexing further on Subject & Category using FAST-Resources Naming Convention (Subject_Category_Topic.extension)
+
+
+
+
+## Adding Subject and Category Filters to Frontend (and possibly migrating it to Next.Js from vanilla Js?)
+
+
+
+
+## Lambda Invocation Trigger (using Github-Actions)
+
+
+
+
