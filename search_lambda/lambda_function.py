@@ -56,14 +56,13 @@ def intersect_result(results):
 def lambda_handler(event, context):
     operations = {
         'GET': lambda dynamo, x: dynamo.scan(**x),
-
     }
     operation = event['httpMethod']
     if operation in operations:
         payload = event['queryStringParameters'] if operation == 'GET' else json.loads(event['body'])
         print(event)
 
-        query_words = [individual_word.strip() for individual_word in payload['query'].lower().split(',')]
+        query_words = [individual_word.strip() for individual_word in payload['query'].lower().split(' ')]
         results = [query_dynamo_db(word) for word in query_words]
 
         if event["requestContext"]["stage"] == 'v2':
