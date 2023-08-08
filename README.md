@@ -34,6 +34,8 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 
 # _Contributions_
 
+Ask questions about this repository at https://chat.collectivai.com/Usaid-Bin-Rehan/FAST_Resources_Reverse_Indexing (UNVERIFIED)
+
 ## _(1) IR Good-First Issues_
 
 ### 1. Resolve Processing Challenges
