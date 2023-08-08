@@ -32,11 +32,15 @@ Search Engine for [FAST-Resources](https://github.com/hassanzhd/FAST-Resources/t
 #### iv. Inserting the Word and its Topic, File Path, and Relevance score (TF in main.py for ordering search results)
 #### v. Using S3 as front, DynamoDB over SQLite, and Actions to trigger Lambda API-Gateway when new file added
 
+
+
 # _Contributions_
+
 
 Ask questions about this repository at https://chat.collectivai.com/Usaid-Bin-Rehan/FAST_Resources_Reverse_Indexing (UNVERIFIED)
 
-## _(1) IR Good-First Issues_
+
+## IR Good-First Issues
 
 ### 1. Resolve Processing Challenges
 #### i. Tokenization (CURRENTLY USING)
@@ -82,38 +86,13 @@ Ask questions about this repository at https://chat.collectivai.com/Usaid-Bin-Re
 ##### a. Binary Independence
 ##### b. Probability Ranking Principle
 
-## _(2) Data-Engineering Good-First Issues_
-- Check Issues
 
-## _(3) Security Good-First Issues_
-
-# _Need to fix documentation below & Create separate Contributions Guidline file:_
-## Generate Reverse Index Flow
-Iterate over all the documents and generate index to make searching possible
-### Steps
-1. Iterate over all the files (pdf, docx, pptx) `main.py`
-2. Extract text `extract_text.py`
-3. Remove **stopwords**, **punctuations**, anything that is not alpha-numeric `process_words.py`
-4. Persist in sqlite table `database.py`
-
-## Search Flow (In Progress)
-A function that take search keywords as input and returns like of documents that contain those words
-
-### Access Patterns
-- Search by keyword(s)
-- Search by keywords and Topic Name
-### Steps
-1. Example
-
-# How can you contribute?
+## How to Contribute?
 
 1. Fork repository
 2. Git Clone [Fast Resources Link](https://github.com/hassanzhd/FAST-Resources/tree/master)
 3. Replace ```self.repo_path = '/Users/jazib/Desktop/workrepo/FAST-Resources/'``` in `main.py` with absolute path to Fast Resources clone
-4. Replace ```self.conn = sqlite3.connect('/Users/jazib/Desktop/workrepo/FAST_Resources_Reverse_Indexer/fast_zakhira.db')``` in `database.py` with any local directory
-5. Push your changes
-6. Create Merge Request
+4. Replace ```self.conn = sqlite3.connect('/Users/jazib/Desktop/workrepo/FAST_Resources_Reverse_Indexer/fast_zakhira.db')``` in `database.py` with any local dir
+5. Push your changes and create merge request
 
-Replace 
 
-```self.repo_path```
